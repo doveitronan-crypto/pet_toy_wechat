@@ -1,0 +1,64 @@
+<!--pages/toy-detail/toy-detail.wxml-->
+<view class="container pb-footer">
+  <!-- Back Action -->
+  <view class="nav-back-row" bindtap="onBack">
+    <text class="back-arrow">❮</text>
+    <text class="back-text">返回前页</text>
+  </view>
+
+  <!-- Big Cover Image -->
+  <view class="card detail-image-card">
+    <image class="cover-image" src="{{toy.imageUrl}}" mode="aspectFill"></image>
+  </view>
+
+  <!-- Title & Category Info -->
+  <view class="card main-info-card">
+    <view class="title-row">
+      <text class="toy-title">{{toy.name}}</text>
+      <text class="category-tag-badge">{{toy.categoryLabel}}</text>
+    </view>
+
+    <view class="rating-row">
+      <text class="star-icon">⭐</text>
+      <text class="rating-value">{{toy.rating}} 分</text>
+      <text class="rating-sub">（用户综合反馈推荐）</text>
+    </view>
+
+    <view class="divider"></view>
+
+    <view class="description-section">
+      <text class="section-subtitle">💡 宝贝描述</text>
+      <text class="description-content">{{toy.description}}</text>
+    </view>
+  </view>
+
+  <!-- Play Guide Steps -->
+  <view class="card guide-card">
+    <text class="section-title">🐾 官方推荐游玩指南</text>
+    <view class="guide-steps-list">
+      <text class="guide-step-text">{{toy.playGuide}}</text>
+    </view>
+  </view>
+
+  <!-- Safety Warning -->
+  <view class="card warning-card">
+    <view class="warning-header">
+      <text class="warning-icon">⚠️</text>
+      <text class="warning-title">咀嚼安全注意事项</text>
+    </view>
+    <text class="warning-content">{{toy.safetyWarning}}</text>
+  </view>
+
+  <!-- Floating Footer Action Bar -->
+  <view class="footer-action-bar">
+    <button 
+      class="footer-btn wishlist {{isFav ? 'active' : ''}}" 
+      bindtap="onToggleWishlist"
+    >
+      {{isFav ? '❤️ 移出心愿单' : '🤍 加入心愿单'}}
+    </button>
+    <button class="footer-btn primary" bindtap="onCopyLink">
+      🛒 一键复制购买链接
+    </button>
+  </view>
+</view>

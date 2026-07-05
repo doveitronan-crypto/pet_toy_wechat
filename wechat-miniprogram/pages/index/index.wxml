@@ -1,0 +1,132 @@
+<!--pages/index/index.wxml-->
+<view class="container">
+  <!-- Top Recommendation Ribbon -->
+  <view class="today-ribbon">
+    <text class="ribbon-icon">✨</text>
+    <text class="ribbon-text">今日宜：开盲盒 · 忌：闲置</text>
+  </view>
+
+  <!-- Matching Status Switcher Panel -->
+  <view class="card pet-match-card">
+    <view class="pet-info-row">
+      <image class="pet-avatar" src="{{activePet.avatarUrl}}" mode="aspectFill"></image>
+      <view class="pet-meta">
+        <view class="pet-title-row">
+          <text class="pet-name">根据“{{activePet.name}}”匹配</text>
+          <text class="sparkle">✨</text>
+        </view>
+        <text class="pet-desc">{{activePet.age}} · {{activePet.breed}} · {{activePet.energy}}</text>
+      </view>
+      <view class="switch-container">
+        <switch checked="{{isMatched}}" color="#FF7A45" bindchange="onToggleMatch" />
+      </view>
+    </view>
+  </view>
+
+  <!-- Category Filter Chips -->
+  <view class="category-scroll-container">
+    <scroll-view class="category-scroll" scroll-x="true" enable-flex="true">
+      <view 
+        wx:for="{{categories}}" 
+        wx:key="id" 
+        class="category-chip {{selectedCategory === item.id ? 'active' : ''}}" 
+        bindtap="onSelectCategory" 
+        data-id="{{item.id}}"
+      >
+        {{item.name}}
+      </view>
+    </scroll-view>
+  </view>
+
+  <!-- Interactive Blind Box Stage -->
+  <view class="card stage-card">
+    <view wx:if="{{!isOpened}}" class="box-closed-stage">
+      <!-- Ambient Lights and Box -->
+      <view class="stage-backdrop"></view>
+      <image 
+        class="box-graphic {{isOpening ? 'shaking' : ''}}" 
+        src="https://images.unsplash.com/photo-1513151233558-d860c5398176?auto=format&fit=crop&q=80&w=300" 
+        mode="aspectFit"
+      ></image>
+      <view class="box-shadow"></view>
+      
+      <button 
+        class="btn-primary start-btn" 
+        hover-class="btn-primary-active" 
+        bindtap="onOpenBlindBox" 
+        disabled="{{isOpening}}"
+      >
+        {{isOpening ? '正在唤醒奇迹...' : '开启神秘盲盒'}}
+      </button>
+      <text class="box-hint">每次开启均有惊喜，快为爱宠开箱吧！</text>
+    </view>
+
+    <!-- Opened Result Card (Replicating exact design & fixes) -->
+    <view wx:else class="box-opened-stage">
+      <view class="opened-title">🎉 恭喜获得专属盲盒！</view>
+      
+      <view class="toy-card-main">
+        <view class="toy-horizontal-layout">
+          <!-- Toy Image -->
+          <view class="toy-image-wrapper">
+            <image class="toy-image" src="{{openedToy.imageUrl}}" mode="aspectFill"></image>
+          </view>
+
+          <!-- Toy Detail Info -->
+          <view class="toy-details-content">
+            <!-- Title, Rating & Suitability Score in one line block -->
+            <view class="toy-meta-line">
+              <text class="toy-title-text">{{openedToy.name}}</text>
+              <view class="toy-scores-row">
+                <view class="toy-rating">
+                  <text class="star-icon">⭐</text>
+                  <text class="rating-val">{{openedToy.rating}}</text>
+                </view>
+                <!-- Suitability score conditionally shown when matched is enabled -->
+                <view wx:if="{{isMatched}}" class="toy-suitability-badge">
+                  匹配度 {{openedToy.suitabilityScore}}%
+                </view>
+              </view>
+            </view>
+
+            <!-- Tags list & Category Badge (with adjusted margin/spacing alignment) -->
+            <view class="toy-tags-container">
+              <text class="category-badge-pill">{{openedToy.categoryLabel}}</text>
+              <text wx:for="{{openedToy.tags}}" wx:key="*this" class="toy-tag-pill">#{{item}}</text>
+            </view>
+
+            <text class="toy-description-text">{{openedToy.description}}</text>
+          </view>
+        </view>
+      </view>
+
+      <!-- Smart Advice & Explanatory Recommendation Bubble -->
+      <view class="recommendation-bubble">
+        <view class="bubble-header">
+          <text class="bubble-icon">✨</text>
+          <text class="bubble-title">畅销爆款推荐理由：</text>
+        </view>
+        <text class="bubble-content">{{recommendationText}}</text>
+      </view>
+
+      <!-- Action Footer Buttons -->
+      <view class="action-footer">
+        <button class="btn-footer secondary" bindtap="onViewGuide">
+          📖 游玩与安全指南
+        </button>
+        <button class="btn-footer wishlist-btn {{isInWishlist ? 'active' : ''}}" bindtap="onToggleWishlist">
+          {{isInWishlist ? '❤️ 已在心愿单' : '🤍 加入心愿单'}}
+        </button>
+      </view>
+
+      <view class="action-footer" style="margin-top: 16rpx; gap: 16rpx;">
+        <button class="btn-footer primary-orange-btn" style="flex: 1; background: #FF7A45 !important; color: #ffffff !important; border: none !important;" bindtap="onCopyPurchaseLink">
+          🛒 一键复制购买链接
+        </button>
+        <button class="btn-footer secondary" style="flex: 1;" bindtap="onResetBox">
+          🔄 再开一次
+        </button>
+      </view>
+    </view>
+  </view>
+</view>

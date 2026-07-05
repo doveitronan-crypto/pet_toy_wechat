@@ -1,0 +1,199 @@
+/* pages/wishlist/wishlist.wxss */
+.wishlist-banner {
+  background-color: #FFFDF9;
+  border: 1rpx solid #F6E6DC;
+  border-radius: 20rpx;
+  padding: 30rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+}
+
+.banner-title {
+  font-size: 30rpx;
+  font-weight: 800;
+  color: #2D231E;
+}
+
+.banner-sub {
+  font-size: 22rpx;
+  color: #8E8E93;
+}
+
+/* List Items */
+.wishlist-items {
+  display: flex;
+  flex-direction: column;
+  gap: 24rpx;
+}
+
+.wishlist-card {
+  padding: 24rpx;
+}
+
+.toy-main-block {
+  display: flex;
+  flex-direction: row;
+  gap: 20rpx;
+  margin-bottom: 20rpx;
+}
+
+.toy-image {
+  width: 140rpx;
+  height: 140rpx;
+  border-radius: 12rpx;
+  border: 1rpx solid #EAEAEA;
+  flex-shrink: 0;
+}
+
+.toy-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.toy-name {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #2D231E;
+}
+
+.category-badge {
+  font-size: 18rpx;
+  background-color: #F1F8FF;
+  color: #0066CC;
+  border: 1rpx solid #D5E8FC;
+  border-radius: 6rpx;
+  padding: 2rpx 8rpx;
+}
+
+.toy-desc {
+  font-size: 22rpx;
+  color: #8E8E93;
+  line-height: 1.4;
+  margin-top: 6rpx;
+}
+
+/* Customized Note section */
+.note-section {
+  background: #FFFBF9;
+  border: 1rpx solid #FDF3EE;
+  border-radius: 16rpx;
+  padding: 16rpx;
+  margin-bottom: 16rpx;
+}
+
+.note-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10rpx;
+}
+
+.note-label {
+  font-size: 22rpx;
+  font-weight: bold;
+  color: #8C6A52;
+}
+
+.note-edit-btn {
+  background: transparent !important;
+  color: #FF7A45 !important;
+  font-size: 22rpx !important;
+  font-weight: bold !important;
+  padding: 0 10rpx !important;
+  margin: 0 !important;
+  width: auto !important;
+  line-height: 1.5 !important;
+  border: none !important;
+  display: inline-block !important;
+}
+
+.input-wrapper {
+  width: 100%;
+}
+
+.note-textarea {
+  width: 100% !important;
+  min-height: 80rpx;
+  font-size: 22rpx;
+  color: #333333;
+  background: #FFFFFF;
+  border: 1rpx solid #FFDEC1;
+  border-radius: 10rpx;
+  padding: 10rpx;
+}
+
+.note-display {
+  font-size: 22rpx;
+  line-height: 1.5;
+}
+
+.note-text {
+  color: #55443B;
+}
+
+.note-text.placeholder {
+  color: #AEAEB2;
+  font-style: italic;
+}
+
+/* Card footer */
+.card-footer {
+  display: flex;
+  justify-content: flex-end;
+  border-top: 1rpx dashed #E8DDD8;
+  padding-top: 16rpx;
+}
+
+.remove-btn {
+  background: transparent !important;
+  color: #AEAEB2 !important;
+  font-size: 22rpx !important;
+  font-weight: 500 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  width: auto !important;
+  line-height: 1.5 !important;
+  border: none !important;
+}
+
+.remove-btn:active {
+  color: #E24C4C !important;
+}
+
+/* Empty State */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 100rpx 0;
+  text-align: center;
+}
+
+.empty-image {
+  width: 160rpx;
+  height: 160rpx;
+  opacity: 0.6;
+  margin-bottom: 24rpx;
+}
+
+.empty-text {
+  font-size: 26rpx;
+  font-weight: bold;
+  color: #8E8E93;
+}
+
+.empty-sub {
+  font-size: 22rpx;
+  color: #AEAEB2;
+  margin-top: 8rpx;
+}

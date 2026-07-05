@@ -1,0 +1,74 @@
+<!--pages/toys/toys.wxml-->
+<view class="container">
+  <!-- Search bar -->
+  <view class="search-header">
+    <view class="search-box">
+      <icon class="search-icon" type="search" size="16"></icon>
+      <input 
+        class="search-input" 
+        placeholder="搜索玩具名称、描述、标签..." 
+        value="{{searchQuery}}" 
+        bindinput="onSearchInput"
+      />
+      <view wx:if="{{searchQuery}}" class="clear-btn" bindtap="onClearSearch">✕</view>
+    </view>
+  </view>
+
+  <!-- Category Selection -->
+  <view class="category-tabs">
+    <view 
+      wx:for="{{categories}}" 
+      wx:key="id" 
+      class="tab-item {{selectedCategory === item.id ? 'active' : ''}}" 
+      bindtap="onSelectCategory" 
+      data-id="{{item.id}}"
+    >
+      {{item.name}}
+    </view>
+  </view>
+
+  <!-- Toy list -->
+  <view class="toys-list">
+    <view 
+      wx:for="{{filteredToys}}" 
+      wx:key="id" 
+      class="card toy-item-card" 
+      bindtap="onViewDetail" 
+      data-id="{{item.id}}"
+    >
+      <view class="toy-horizontal">
+        <image class="toy-cover" src="{{item.imageUrl}}" mode="aspectFill"></image>
+        <view class="toy-meta">
+          <view class="title-row">
+            <text class="toy-name">{{item.name}}</text>
+            <!-- Favorites toggle inside list -->
+            <view class="fav-icon-box" catchtap="onToggleWishlist" data-toy="{{item}}">
+              <text class="heart-icon">{{item.isFav ? '❤️' : '🤍'}}</text>
+            </view>
+          </view>
+
+          <view class="rating-category">
+            <view class="rating">
+              <text class="star">⭐</text>
+              <text class="rating-num">{{item.rating}}</text>
+            </view>
+            <text class="category-tag">{{item.categoryLabel}}</text>
+          </view>
+
+          <view class="tags-row">
+            <text wx:for="{{item.tags}}" wx:key="*this" wx:for-item="tag" class="tag-chip">#{{tag}}</text>
+          </view>
+
+          <text class="desc">{{item.description}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- Empty state -->
+    <view wx:if="{{filteredToys.length === 0}}" class="empty-state">
+      <image class="empty-image" src="https://images.unsplash.com/photo-1544568100-847a948585b9?auto=format&fit=crop&q=80&w=200" mode="aspectFit"></image>
+      <text class="empty-text">未能搜选到匹配的自嗨玩具...</text>
+      <text class="empty-sub">尝试更换筛选词吧</text>
+    </view>
+  </view>
+</view>

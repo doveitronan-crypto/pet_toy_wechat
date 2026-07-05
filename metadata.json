@@ -1,0 +1,6 @@
+{
+  "name": "玩具情报站",
+  "description": "专为宠物量身定制的玩具匹配与智能评测情报站，提供个性化玩具推荐、智能盲盒开启以及宠物专属玩乐方案。",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

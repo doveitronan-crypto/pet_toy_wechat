@@ -1,0 +1,48 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/toys/toys",
+    "pages/wishlist/wishlist",
+    "pages/mine/mine",
+    "pages/toy-detail/toy-detail"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#FFF8F5",
+    "navigationBarTitleText": "萌宠盲盒匹配",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#8E8E93",
+    "selectedColor": "#FF7A45",
+    "backgroundColor": "#FFFFFF",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "开盲盒",
+        "iconPath": "assets/images/box.png",
+        "selectedIconPath": "assets/images/box_active.png"
+      },
+      {
+        "pagePath": "pages/toys/toys",
+        "text": "玩具库",
+        "iconPath": "assets/images/toys.png",
+        "selectedIconPath": "assets/images/toys_active.png"
+      },
+      {
+        "pagePath": "pages/wishlist/wishlist",
+        "text": "心愿单",
+        "iconPath": "assets/images/heart.png",
+        "selectedIconPath": "assets/images/heart_active.png"
+      },
+      {
+        "pagePath": "pages/mine/mine",
+        "text": "我的",
+        "iconPath": "assets/images/pet.png",
+        "selectedIconPath": "assets/images/pet_active.png"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json"
+}

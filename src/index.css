@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-brand-primary: #95442b;
+  --color-brand-primary-light: #f5e0d6;
+  --color-brand-secondary: #3e6653;
+  --color-brand-secondary-light: #e3f0e8;
+  --color-brand-tertiary: #785602;
+  --color-brand-tertiary-light: #fbf3e3;
+  --color-brand-bg: #f9f7f4;
+  --color-brand-card: #ffffff;
+  --color-brand-text: #2e201a;
+  --color-brand-text-subtle: #7d6e65;
+  --color-brand-border: #e8e2db;
+
+  --font-sans: "Plus Jakarta Sans", "Inter", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+}
+
+/* Custom animations and scrollbar stylings */
+@layer base {
+  body {
+    background-color: #f9f7f4;
+    color: #2e201a;
+    font-family: var(--font-sans);
+  }
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}

@@ -1,0 +1,170 @@
+<!--pages/mine/mine.wxml-->
+<view class="container">
+  <!-- Pet Profiles Header -->
+  <view class="section-header">
+    <text class="title-main">🐾 我的萌宠档案</text>
+    <button class="btn-add-pet" bindtap="onShowAddPetModal">＋ 新增档案</button>
+  </view>
+
+  <!-- Pets List -->
+  <view class="pets-list">
+    <view 
+      wx:for="{{pets}}" 
+      wx:key="id" 
+      class="card pet-card {{activePet.id === item.id && isMatched ? 'matching-active' : (activePet.id === item.id ? 'active-but-no-match' : '')}}"
+      bindtap="onSelectPet"
+      data-pet="{{item}}"
+    >
+      <view class="pet-card-body">
+        <view class="pet-card-left">
+          <image class="pet-avatar" src="{{item.avatarUrl}}" mode="aspectFill"></image>
+          <view class="pet-details">
+            <view class="pet-name-line">
+              <text class="pet-name-text">{{item.name}}</text>
+              <text class="pet-type-icon">{{item.type === 'dog' ? '🐶' : '🐱'}}</text>
+            </view>
+            <text class="pet-stats">{{item.breed}} · {{item.age}} · {{item.energy}}</text>
+          </view>
+        </view>
+
+        <view class="pet-card-actions" catchtap="onPreventDefault">
+          <!-- Delete button (Only if more than 1 pet) -->
+          <view 
+            wx:if="{{pets.length > 1}}" 
+            class="action-icon-btn delete-btn" 
+            bindtap="onDeletePet" 
+            data-id="{{item.id}}"
+            title="删除"
+          >
+            🗑️
+          </view>
+          
+          <!-- Toggle Match State button -->
+          <button 
+            class="match-action-btn {{activePet.id === item.id && isMatched ? 'matching' : 'not-matching'}}"
+            bindtap="onToggleMatchAction"
+            data-pet="{{item}}"
+          >
+            {{activePet.id === item.id ? (isMatched ? '正在匹配' : '开启匹配') : '切换匹配'}}
+          </button>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- Add Pet Form Overlay Section (Toggled) -->
+  <view wx:if="{{showAddPetModal}}" class="add-pet-overlay">
+    <view class="add-pet-dialog card">
+      <view class="dialog-header">
+        <text class="dialog-title">新增宝贝专属档案</text>
+        <view class="close-icon" bindtap="onHideAddPetModal">✕</view>
+      </view>
+      
+      <view class="form-body">
+        <!-- Type selection -->
+        <view class="form-group">
+          <text class="form-label">宠物类型</text>
+          <radio-group class="radio-row" bindchange="onNewTypeChange">
+            <label class="radio-label">
+              <radio value="dog" checked="{{newType === 'dog'}}" color="#FF7A45" /> 狗狗
+            </label>
+            <label class="radio-label">
+              <radio value="cat" checked="{{newType === 'cat'}}" color="#FF7A45" /> 猫咪
+            </label>
+          </radio-group>
+        </view>
+
+        <!-- Name input -->
+        <view class="form-group">
+          <text class="form-label">宝贝昵称</text>
+          <input class="form-input" placeholder="输入宠物昵称" value="{{newName}}" bindinput="onNewNameInput" />
+        </view>
+
+        <!-- Breed input -->
+        <view class="form-group">
+          <text class="form-label">品种</text>
+          <input class="form-input" placeholder="例如：金毛寻回犬、美短折耳等" value="{{newBreed}}" bindinput="onNewBreedInput" />
+        </view>
+
+        <!-- Age input -->
+        <view class="form-group">
+          <text class="form-label">年龄</text>
+          <input class="form-input" placeholder="例如：2岁、6个月" value="{{newAge}}" bindinput="onNewAgeInput" />
+        </view>
+
+        <!-- Energy level -->
+        <view class="form-group">
+          <text class="form-label">运动消耗特征</text>
+          <radio-group class="radio-row" bindchange="onNewEnergyChange">
+            <label class="radio-label">
+              <radio value="高运动量" checked="{{newEnergy === '高运动量'}}" color="#FF7A45" /> 高运动量
+            </label>
+            <label class="radio-label">
+              <radio value="中等运动量" checked="{{newEnergy === '中等运动量'}}" color="#FF7A45" /> 中等运动量
+            </label>
+            <label class="radio-label">
+              <radio value="低运动量" checked="{{newEnergy === '低运动量'}}" color="#FF7A45" /> 低运动量
+            </label>
+          </radio-group>
+        </view>
+      </view>
+
+      <view class="dialog-footer">
+        <button class="dialog-btn cancel" bindtap="onHideAddPetModal">取消</button>
+        <button class="dialog-btn confirm" bindtap="onSaveNewPet">保存档案</button>
+      </view>
+    </view>
+  </view>
+
+  <!-- Blind Box Opening History Section -->
+  <view class="history-section">
+    <view class="history-header">
+      <view class="history-title-row">
+        <text class="history-icon">📜</text>
+        <text class="history-title">盲盒开启历史</text>
+      </view>
+      <button 
+        wx:if="{{historyList.length > 0}}" 
+        class="btn-clear-all" 
+        bindtap="onClearAllHistory"
+      >
+        🗑️ 清空全部
+      </button>
+    </view>
+
+    <!-- History List -->
+    <view wx:if="{{historyList.length > 0}}" class="history-list card">
+      <view 
+        wx:for="{{historyList}}" 
+        wx:key="id" 
+        class="history-item-row"
+        bindtap="onViewHistoryDetail"
+        data-id="{{item.toy.id}}"
+      >
+        <image class="history-toy-cover" src="{{item.toy.imageUrl}}" mode="aspectFill"></image>
+        <view class="history-toy-meta">
+          <text class="history-toy-name">{{item.toy.name}}</text>
+          <text class="history-toy-sub">配对宠物: {{item.petName}} · {{item.toy.categoryLabel}}</text>
+        </view>
+        <view class="history-right-col" catchtap="onPreventDefault">
+          <text class="history-time">{{item.openedAt}}</text>
+          <view 
+            class="btn-delete-history" 
+            bindtap="onDeleteHistoryItem" 
+            data-id="{{item.id}}"
+            title="删除单条"
+          >
+            🗑️
+          </view>
+          <text class="arrow-right">❯</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- Empty history state -->
+    <view wx:else class="empty-history-box">
+      <text class="empty-history-title">暂无开启历史记录</text>
+      <text class="empty-history-sub">快去首页开启属于宠物的专属盲盒吧！</text>
+    </view>
+  </view>
+</view>

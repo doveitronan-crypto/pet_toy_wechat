@@ -1,0 +1,94 @@
+/** app.wxss **/
+page {
+  background-color: #FFF9F6;
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica,
+    Segoe UI, Arial, Roboto, 'PingFang SC', 'miui', 'Hiragino Sans GB', 'Microsoft Yahei',
+    sans-serif;
+  color: #333333;
+  box-sizing: border-box;
+  font-size: 28rpx;
+  line-height: 1.5;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* Color Variables */
+.color-primary { color: #FF7A45; }
+.color-primary-light { color: #FFF2EC; }
+.color-text-subtle { color: #8E8E93; }
+.color-border { color: #F1E5DF; }
+
+/* Grid & Layout Helpers */
+.container {
+  padding: 30rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 30rpx;
+}
+
+.card {
+  background: #ffffff;
+  border-radius: 28rpx;
+  border: 2rpx solid #F3E6E0;
+  padding: 30rpx;
+  box-shadow: 0 4rpx 16rpx rgba(139, 92, 26, 0.03);
+  position: relative;
+}
+
+.title-main {
+  font-size: 34rpx;
+  font-weight: 800;
+  color: #2D231E;
+}
+
+.text-bold {
+  font-weight: bold;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.flex-between {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Custom Buttons */
+.btn-primary {
+  background: #FF7A45;
+  color: #ffffff;
+  font-weight: bold;
+  border-radius: 20rpx;
+  text-align: center;
+  font-size: 28rpx;
+  padding: 20rpx 0;
+  border: none;
+}
+
+.btn-primary-active {
+  opacity: 0.9;
+  transform: scale(0.98);
+}
+
+.badge {
+  font-size: 20rpx;
+  font-weight: bold;
+  padding: 6rpx 14rpx;
+  border-radius: 12rpx;
+}
+
+.badge-orange {
+  background: #FFF2EC;
+  color: #FF7A45;
+  border: 1rpx solid #FFD3C1;
+}
+
+.badge-gray {
+  background: #F5F5F7;
+  color: #8E8E93;
+  border: 1rpx solid #E5E5EA;
+}

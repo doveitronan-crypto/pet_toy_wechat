@@ -1,0 +1,78 @@
+<!--pages/wishlist/wishlist.wxml-->
+<view class="container">
+  <!-- Top banner -->
+  <view class="wishlist-banner">
+    <text class="banner-title">❤️ 爱宠的愿望清单</text>
+    <text class="banner-sub">在这里记录和规划最适合毛孩子的自嗨好物</text>
+  </view>
+
+  <view class="wishlist-items">
+    <view 
+      wx:for="{{wishlist}}" 
+      wx:key="uniqueId" 
+      class="card wishlist-card"
+    >
+      <!-- Horizontal Toy block -->
+      <view class="toy-main-block" bindtap="onViewDetail" data-id="{{item.id}}">
+        <image class="toy-image" src="{{item.imageUrl}}" mode="aspectFill"></image>
+        <view class="toy-info">
+          <view class="title-row">
+            <text class="toy-name">{{item.name}}</text>
+            <text class="category-badge">{{item.categoryLabel}}</text>
+          </view>
+          <text class="toy-desc">{{item.description}}</text>
+        </view>
+      </view>
+
+      <!-- Customized Note Section -->
+      <view class="note-section" catchtap="onPreventDefault">
+        <view class="note-header">
+          <text class="note-label">📝 专属定制备忘：</text>
+          <button 
+            class="note-edit-btn" 
+            bindtap="onToggleEditNote" 
+            data-id="{{item.id}}"
+          >
+            {{editingId === item.id ? '💾 保存' : '✍️ 编辑'}}
+          </button>
+        </view>
+
+        <!-- Read-only or Editing input -->
+        <view wx:if="{{editingId === item.id}}" class="input-wrapper">
+          <textarea 
+            class="note-textarea" 
+            placeholder="写下关于宠物的需求（例如：作为可乐的周末体能消耗大礼、买给糯米磨牙等...）" 
+            value="{{notes[item.id] || ''}}" 
+            bindinput="onNoteInput"
+            data-id="{{item.id}}"
+            maxlength="200"
+            auto-height="true"
+          />
+        </view>
+        <view wx:else class="note-display">
+          <text class="note-text {{notes[item.id] ? '' : 'placeholder'}}">
+            {{notes[item.id] || '暂无专属备忘，点击编辑添加定制笔记...'}}
+          </text>
+        </view>
+      </view>
+
+      <!-- Card footer remove action -->
+      <view class="card-footer" catchtap="onPreventDefault">
+        <button 
+          class="remove-btn" 
+          bindtap="onRemoveItem" 
+          data-toy="{{item}}"
+        >
+          🗑️ 移出心愿单
+        </button>
+      </view>
+    </view>
+
+    <!-- Empty State -->
+    <view wx:if="{{wishlist.length === 0}}" class="empty-state">
+      <image class="empty-image" src="https://images.unsplash.com/photo-1544568100-847a948585b9?auto=format&fit=crop&q=80&w=200" mode="aspectFit"></image>
+      <text class="empty-text">心愿单空空如也...</text>
+      <text class="empty-sub">开启盲盒或浏览玩具库时，点击心形标志收藏吧！</text>
+    </view>
+  </view>
+</view>
